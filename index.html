@@ -1,0 +1,300 @@
+
+<head>
+	<title>OBAC</title>
+	<meta charset="utf-8">
+	<meta property="og:title" content="Title">
+	<meta property="og:description" content="Test">
+	<link rel="stylesheet" href="style.css?1">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+	<script type="text/javascript">
+		function toggle(id) {
+			var e = document.getElementById(id);
+			if(e.style.display == 'block')
+				e.style.display = 'none';
+			else
+				e.style.display = 'block';
+		}
+	</script>
+</head>
+<div class="header" id="top">
+	<h1>
+		Offline-Boosted Actor-Critic: <br>
+		Adaptively Blending Optimal Historical Behaviors in Deep Off-Policy RL
+	</h1>
+	<table class="authors">
+		<h4>
+			<span class="authors-affiliation">Yu Luo<sup>1</sup>, Tianying Ji<sup>1</sup>, Fuchun Sun<sup>1</sup>, Jianwei Zhang<sup>2</sup>, Huazhe Xu<sup>3,4,5</sup>, Xianyuan Zhan<sup>5,6</sup></span>
+			<br>
+			<br>
+			<span class="authors-affiliation" style="font-size: 0.95em"><sup>1</sup>Department of Computer Science and Technology, Tsinghua University, <br> <sup>2</sup>University of Hamburg, <br> <sup>3</sup>Institute for Interdisciplinary Information Sciences, Tsinghua University,  <br> <sup>4</sup>Shanghai Qi Zhi Institute, <br> <sup>5</sup>Shanghai Artificial Intelligence Laboratory, <br> <sup>6</sup>Institute for AI Industry Research, Tsinghua University</span>
+		</h4>
+	</table>
+</div>
+<div class="content">
+	<div>
+		<h2>Abstract</h2>
+		<p class="abstract">
+			Off-policy reinforcement learning (RL) has achieved notable success in tackling many complex real-world tasks, by leveraging previously collected data for policy learning. However, most existing off-policy RL algorithms fail to maximally exploit the information in the replay buffer, limiting sample efficiency and policy performance. In this work, we discover that concurrently training an offline RL policy based on the shared online replay buffer can sometimes outperform the original online learning policy, though the occurrence of such performance gains remains uncertain. This motivates a new possibility of harnessing the emergent outperforming offline optimal policy to improve online policy learning. Based on this insight, we present Offline-Boosted Actor-Critic (OBAC), a model-free online RL framework that elegantly identifies the outperforming offline policy through value comparison, and uses it as an adaptive constraint to guarantee stronger policy learning performance. Our experiments demonstrate that OBAC outperforms other popular model-free RL baselines and rivals advanced model-based RL methods in terms of sample efficiency and asymptotic performance across <b>53</b> tasks spanning <b>6</b> task suites.
+		</p>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>Policy Behavior</h2>
+		<div class="figure-caption">
+			<p>
+				We visualize the behaviors of OBAC in different tasks to show its effectivenenss. 
+			</p>
+		</div>
+		<h3>OBAC in Mujoco Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>Ant</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Mujoco/Ant.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>HumanoidStandup</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Mujoco/HumanoidStandup.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Swimmer</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Mujoco/Swimmer.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+		<h3>OBAC in DM Control Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>AcrobotSwingup</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/AcrobotSwingup.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>DogWalk</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/DogWalk.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>DogRun</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/DogRun.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>HumanoidRun</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/HumanoidRun.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Swimmer15</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/Swimmer15.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>WalkerRun</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/DMControl/WalkerRun.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+		<h3>OBAC in Meta-World Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>Assembly</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/assemble.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Coffer Push</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/cofferpush.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Disassemble</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/disassemble.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Hammer</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/hammer.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Pick Place</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/pickplace.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Soccer</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Metaworld/soccer.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+		<h3>OBAC in Adroit Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>Baoding-4th</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Adroit/Baoding.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Door</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Adroit/Door.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>Pen</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Adroit/Pen.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+		<h3>OBAC in ManiSkill2 Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>PickYCB</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Maniskill/PickYCB.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>StackCube</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Maniskill/StackCube.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>TurnFaucet</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Maniskill/TurnFaucet.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+		<h3>OBAC in Myosuite Benchmarks</h3>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<div class="content-video-frame medium">
+					<span>myoHandKey</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Myosuite/myoHandKey.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>myoHandPose</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Myosuite/myoHandPose.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<div class="content-video-frame medium">
+					<span>myoHandReach</span>
+					<video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+						<source src="Videos/Myosuite/myoHandReach.mp4" type="video/mp4"/>
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>Benchmark Results</h2>
+		<div class="figure-caption">
+			<p>
+				We evaluate <b>OBAC</b> across <b>53</b> continuous control tasks spanning <b>6</b> domains: <span style="color: #ff0000">Mujoco</span>, <span style="color: #ff0000">DM Control</span>, <span style="color: #ff0000">Meta-World</span>, <span style="color: #ff0000">Adroit</span>, <span style="color: #ff0000">Myosuite</span>, and <span style="color: #ff0000">ManiSkill2</span>. These tasks cover a wide range of challenges, including high-dimensional states and actions (up to $\mathcal{S}\in\mathbb{R}^{375}$ and $\mathcal{A}\in\mathbb{R}^{39}$), sparse rewards, multi-object and delicate manipulation, musculoskeletal control, and complex locomotion.
+			</p>
+		</div>
+		<h3>OBAC in Mujoco Benchmarks</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 6 continuous control tasks in Mujoco suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 199px; background-image: url(Figures/mujoco_results.png);"></div>
+		</div>
+		
+		<h3>OBAC in DM Control Benchmarks</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 17 continuous control tasks in DM Control suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 410px; background-image: url(Figures/dmcontrol_results.png);"></div>
+		</div>
+		
+		<h3>OBAC in Meta-World Benchmarks</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 17 continuous control tasks in Meta-World suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 410px; background-image: url(Figures/metaworld_results.png);"></div>
+		</div>
+		
+		<h3>OBAC in Adroit Benchmarks</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 4 continuous control tasks in Adroit suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 160px; background-image: url(Figures/adroit_results.png);"></div>
+		</div>
+		
+		<h3>OBAC in ManiSkill2 Benchmarks</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 5 continuous control tasks in ManiSkill2 suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 160px; background-image: url(Figures/maniskill_results.png);"></div>
+		</div>
+		
+		<h3>OBAC in Myosuite Benchmark</h3>
+		<div class="figure-caption">
+			<p>
+				We evaluate OBAC on 4 continuous control tasks in Myosuite suite.
+			</p>
+		</div>
+		<div class="figure-caption">
+			<div class="figure" style="height: 160px; background-image: url(Figures/myosuite_results.png);"></div>
+		</div>
+</div>
+<footer>
+<a href="#top" class="bold">To top &UpArrow;</a>
+</footer>
